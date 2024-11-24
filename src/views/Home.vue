@@ -7,10 +7,12 @@
       </ion-header>
       <ion-content :fullscreen="true">
         <div id="container">
-          <div class="ion-text-center">
-            <ion-button expand="block" @click="fetchData">Get Data</ion-button>
+          <div class="ion-text-center button-container">
+          <ion-button @click="fetchData">Get Data</ion-button>
+          <ion-button @click="resetData" color="warning">Reset Data</ion-button>
           </div>
-          <ion-grid>
+            
+        <ion-grid>
             <ion-row>
               <ion-col size="4"><strong>Name</strong></ion-col>
               <ion-col size="4"><strong>Symbol</strong></ion-col>
@@ -28,8 +30,9 @@
   </template>
   
   
-  <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { defineComponent, ref } from "vue";
 import axios from "axios";
 
 interface Crypto {
@@ -39,6 +42,10 @@ interface Crypto {
   price_usd: string;
 }
 const cryptos = ref<Crypto[]>([]);
+  const resetData = () => {
+  cryptos.value = []; 
+};
+
 const fetchData = async () => {
   try {
     const response = await axios.get("https://api.coinlore.net/api/tickers/");
@@ -77,6 +84,12 @@ ion-row {
 ion-col {
   text-align: center;
   padding: 8px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px; /* Jarak antara tombol */
 }
 </style>
 
