@@ -1,0 +1,7 @@
+{
+  "name": "cryptokuy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
